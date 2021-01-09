@@ -8,7 +8,7 @@ import {
 } from '../actionCreators';
 
 // Speed at which final frame updates
-const finalFrameSpeed = 1000;
+const finalFrameSpeed = 100;
 
 // Function sorts array and creates array of frames to be rendered
 const bubbleSort = (stateArr, dispatch, speed) => {
@@ -49,6 +49,7 @@ const bubbleSort = (stateArr, dispatch, speed) => {
 
 // Function recursively calls itself while dispatching frames to be rendered with
 // a pause of 'speed' time inbetween.
+
 const dispatchFrames = (frames, dispatch, arr, speed) => {
   /*
     TODO: 
@@ -67,9 +68,9 @@ const dispatchFrames = (frames, dispatch, arr, speed) => {
       // remove highlighting from all elements because algorithm has terminated
       dispatch(setCurrentFocusedElements([]));
       // revert all elements to be highlighted as sorted
-      dispatch(setCurrentSorted(array.map((num, index) => index)));
+      dispatch(setCurrentSorted(arr.map((num, index) => index)));
       // revert isRunning to false as sorting has terminated
-      dipatch(setIsRunning(false));
+      dispatch(setIsRunning(false));
     }, finalFrameSpeed);
     return;
   }
@@ -89,7 +90,7 @@ const dispatchFrames = (frames, dispatch, arr, speed) => {
   }
   // If frame is length 2 and contains boolean in first position then this element
   // is to be added to the portion of elements in their final sorted position
-  else if (leadingFrameLen === 2 && typeof frame[0][0] === 'boolean') {
+  else if (leadingFrameLen === 2 && typeof frames[0][0] === 'boolean') {
     dispatchFunc = setCurrentSorted;
   }
   // Else this frame if of length 2 and contains two elements that are being focused

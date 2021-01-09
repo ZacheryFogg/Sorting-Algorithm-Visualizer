@@ -5,7 +5,7 @@ import ArrayDisplay from './ArrayDisplay';
 const App = () => {
   return (
     <div>
-      <Control />
+      <ControlBar />
       <ArrayDisplay />
     </div>
   );

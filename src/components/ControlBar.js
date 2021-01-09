@@ -45,7 +45,7 @@ class ControlBar extends React.Component {
       isRunning,
     } = this.props;
     // TODO: Not sure if speed should be here and how is should be calculated
-    const speed = 2000;
+    const speed = 50;
     // TODO: Play with colors
     const textColor = 'purple';
 
@@ -78,13 +78,18 @@ class ControlBar extends React.Component {
 }
 
 // Get state from store and map to props
-const mapStateToProps = (state, ownProps) => {
-  return {
-    array: state.array,
-    currAlgorithm: state.currAlgorithm,
-    isRunning: state.isRunning,
-  };
-};
+// const mapStateToProps = (state, ownProps) => {
+//   return {
+//     array: state.array,
+//     currAlgorithm: state.currAlgorithm,
+//     isRunning: state.isRunning,
+//   };
+// };
+const mapStateToProps = ({ array, currAlgorithm, isRunning }) => ({
+  array,
+  currAlgorithm,
+  isRunning,
+});
 
 // action creators that dispatch info to be caught by reducers
 const mapDispatchToProps = () => (dispatch) => ({
@@ -106,7 +111,7 @@ const mapDispatchToProps = () => (dispatch) => ({
   },
   startSort: (alg, arr, speed) => {
     // Determine sort to launch
-    sortingAlg = bubbleSort;
+    let sortingAlg = bubbleSort;
     // Nothing has been sorted so pass nothing
     dispatch(setCurrentSorted([]));
     dispatch(setIsRunning(true));
