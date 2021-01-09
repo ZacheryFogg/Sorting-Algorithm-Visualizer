@@ -11,7 +11,8 @@ class ArrayDisplay extends React.Component {
     const elementWidth = `${20}px`;
     const margin = `${2}px`;
     // if width is too small than color of text for values of each element become transparent
-    const textColor = elementWidth > 15 ? 'black' : 'transparent';
+    //const textColor = elementWidth > 15 ? 'black' : 'transparent';
+    const textColor = 'black';
     const fontSize = `${10}`;
     if (array.length) {
       return array.map((val, index) => {

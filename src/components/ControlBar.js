@@ -45,7 +45,7 @@ class ControlBar extends React.Component {
       isRunning,
     } = this.props;
     // TODO: Not sure if speed should be here and how is should be calculated
-    const speed = 50;
+    const speed = 100;
     // TODO: Play with colors
     const textColor = 'purple';
 

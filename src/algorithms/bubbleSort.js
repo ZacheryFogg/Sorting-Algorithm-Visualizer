@@ -78,7 +78,7 @@ const dispatchFrames = (frames, dispatch, arr, speed) => {
 
   // Determine the dispatch function to call the frames with
   let dispatchFunc = null;
-  const leadingFrameLen = frames[0];
+  const leadingFrameLen = frames[0].length;
   // If length is greater than 3 then this frame represents the entire array
   if (leadingFrameLen > 3) {
     dispatchFunc = setArray;
