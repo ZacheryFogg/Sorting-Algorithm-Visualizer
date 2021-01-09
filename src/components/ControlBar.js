@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import '../styles/controlBar.css';
 
 import {
   setArray,
@@ -51,7 +52,7 @@ class ControlBar extends React.Component {
 
     return (
       <div id="controlBar">
-        <div>
+        <div id="generateNewArrayBtn">
           <button
             onClick={() => {
               generateNewArray(array.length);
@@ -65,6 +66,7 @@ class ControlBar extends React.Component {
         <div>{/*Add Ability to change Algorithms*/}</div>
         <div>
           <button
+            id="startSortBtn"
             onClick={() => {
               startSort(currAlgorithm, array, speed);
             }}

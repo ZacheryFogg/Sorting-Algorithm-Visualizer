@@ -1,0 +1,12 @@
+#controlBar {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 10px;
+}
+#generateNewArrayBtn {
+  display: inline-block;
+}
+
+#startSortBtn {
+  display: inline-block;
+}

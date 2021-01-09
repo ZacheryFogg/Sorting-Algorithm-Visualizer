@@ -8,11 +8,11 @@ class ArrayDisplay extends React.Component {
     const { array, currFocusedElements, currSorted, currSwappers } = this.props;
 
     // TODO: make width and margin, fontSize depend on length of array
-    const elementWidth = `${20}px`;
-    const margin = `${2}px`;
+    const elementWidth = `${25}px`;
+    const margin = `${1}px`;
     // if width is too small than color of text for values of each element become transparent
     //const textColor = elementWidth > 15 ? 'black' : 'transparent';
-    const textColor = 'black';
+    const textColor = 'white';
     const fontSize = `${10}`;
     if (array.length) {
       return array.map((val, index) => {
@@ -52,7 +52,45 @@ class ArrayDisplay extends React.Component {
     }
   };
   render() {
-    return <div id="arrayDisplay">{this.renderedArray()}</div>;
+    return (
+      <div id="arrayDisplay">
+        <div id="arrayBody">{this.renderedArray()}</div>
+        <div id="legend">
+          <div className="legendBlock">
+            <div className="colorBlock" id="redBlock">
+              R
+            </div>
+            <p>
+              <strong>Red:</strong> A pair of elements will be swapped
+            </p>
+          </div>
+          <div className="legendBlock">
+            <div className="colorBlock" id="blueBlock">
+              B
+            </div>
+            <p>
+              <strong>Blue:</strong> An element is in its final position
+            </p>
+          </div>
+          <div className="legendBlock">
+            <div className="colorBlock" id="greenBlock">
+              G
+            </div>
+            <p>
+              <strong>Green:</strong> A pair of elements is being evaluated
+            </p>
+          </div>
+          <div className="legendBlock">
+            <div className="colorBlock" id="purpleBlock">
+              P
+            </div>
+            <p>
+              <strong>Purple:</strong> An element is still unsorted
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
