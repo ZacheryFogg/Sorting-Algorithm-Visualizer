@@ -7,12 +7,18 @@ import {
   setCurrAlgorithm,
   setCurrentSorted,
   setIsRunning,
+  setCurrSpeed,
 } from '../actionCreators';
 import bubbleSort from '../algorithms/bubbleSort';
 
 //Import action creators
 
 class ControlBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.callbackChangeSpeedBound = this.callbackChangeSpeed.bind(this);
+    this.callbackIsRunningBound = this.callbackIsRunning.bind(this);
+  }
   componentDidMount() {
     /*
       TODO: 
@@ -35,25 +41,35 @@ class ControlBar extends React.Component {
       - allow speed to change based on position of slider
       would like speed to a state property that can be changed
     */
+    this.props.changeSpeed(event.target.valueAsNumber);
+  }
+
+  callbackChangeSpeed() {
+    return this.props.speed;
+  }
+
+  callbackIsRunning() {
+    return this.props.isRunning;
   }
   render() {
     const {
       array,
       currAlgorithm,
       startSort,
+      cancelSort,
       generateNewArray,
-      changeCurrAlgorithm,
+      //changeCurrAlgorithm,
       isRunning,
+      speed,
     } = this.props;
     // TODO: Not sure if speed should be here and how is should be calculated
-    const speed = 100;
-    // TODO: Play with colors
-    const textColor = 'purple';
 
+    // TODO: Play with colors
     return (
       <div id="controlBar">
         <div id="generateNewArrayBtn">
           <button
+            disabled={isRunning ? 'disabled' : null}
             onClick={() => {
               generateNewArray(array.length);
             }}
@@ -61,18 +77,42 @@ class ControlBar extends React.Component {
             Generate New Array
           </button>
         </div>
-        <div>{/*Add Speed Slider and associated logic*/}</div>
+        <div id="speedRangeContainer">
+          <label id="speedRangeLabel">Set Speed:</label>
+
+          {
+            <input
+              id="speedRangeInput"
+              type="range"
+              min="1"
+              max="1000"
+              value={speed}
+              //disabled={isRunning ? 'disabled' : null}
+              onChange={(event) => this.handleSpeedChange(event)}
+            />
+          }
+        </div>
         <div>{/*Add Size Slider and associated logic*/}</div>
         <div>{/*Add Ability to change Algorithms*/}</div>
         <div>
           <button
             id="startSortBtn"
+            disabled={isRunning ? 'disabled' : null}
             onClick={() => {
-              startSort(currAlgorithm, array, speed);
+              startSort(
+                currAlgorithm,
+                array,
+                speed,
+                this.callbackChangeSpeedBound,
+                this.callbackIsRunningBound
+              );
             }}
           >
             Start Sort
           </button>
+        </div>
+        <div>
+          <button onClick={() => cancelSort()}>Cancel Sort</button>
         </div>
       </div>
     );
@@ -87,10 +127,11 @@ class ControlBar extends React.Component {
 //     isRunning: state.isRunning,
 //   };
 // };
-const mapStateToProps = ({ array, currAlgorithm, isRunning }) => ({
+const mapStateToProps = ({ array, currAlgorithm, isRunning, speed }) => ({
   array,
   currAlgorithm,
   isRunning,
+  speed,
 });
 
 // action creators that dispatch info to be caught by reducers
@@ -111,14 +152,27 @@ const mapDispatchToProps = () => (dispatch) => ({
     dispatch(setArray(randomArr));
     dispatch(setCurrentSorted([]));
   },
-  startSort: (alg, arr, speed) => {
+  startSort: (
+    alg = bubbleSort,
+    arr,
+    speed,
+    callbackChangeSpeed,
+    callbackIsRunning
+  ) => {
     // Determine sort to launch
     let sortingAlg = bubbleSort;
     // Nothing has been sorted so pass nothing
     dispatch(setCurrentSorted([]));
     dispatch(setIsRunning(true));
     // start sorting alg
-    sortingAlg(arr, dispatch, speed);
+    sortingAlg(arr, dispatch, speed, callbackChangeSpeed, callbackIsRunning);
+  },
+  //TODO: add pause resume mechanism maybe, would work differently to cancel sort
+  cancelSort: () => {
+    dispatch(setIsRunning(false));
+  },
+  changeSpeed: (val) => {
+    dispatch(setCurrSpeed(val));
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ControlBar);

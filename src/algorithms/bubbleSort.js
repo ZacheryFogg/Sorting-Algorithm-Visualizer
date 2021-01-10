@@ -8,10 +8,9 @@ import {
 } from '../actionCreators';
 
 // Speed at which final frame updates
-const finalFrameSpeed = 100;
 
 // Function sorts array and creates array of frames to be rendered
-const bubbleSort = (stateArr, dispatch, speed) => {
+const bubbleSort = (stateArr, dispatch, speed, getSpeed, getIsRunning) => {
   // New array as to avoid mutating the original state
   let arr = stateArr.slice(0);
   // Array to hold 'frames' to be rendered
@@ -43,14 +42,23 @@ const bubbleSort = (stateArr, dispatch, speed) => {
     frames.push([true, arr.length - 1 - iteration]);
     iteration++;
   }
-  dispatchFrames(frames, dispatch, arr, speed);
-  return arr;
+  setTimeout(() => {
+    dispatchFrames(frames, dispatch, arr, speed, getSpeed, getIsRunning);
+    return arr;
+  }, 100);
 };
 
 // Function recursively calls itself while dispatching frames to be rendered with
 // a pause of 'speed' time inbetween.
 
-const dispatchFrames = (frames, dispatch, arr, speed) => {
+const dispatchFrames = (
+  frames,
+  dispatch,
+  arr,
+  speed,
+  getSpeed,
+  getIsRunning
+) => {
   /*
     TODO: 
     
@@ -58,8 +66,22 @@ const dispatchFrames = (frames, dispatch, arr, speed) => {
     clears timeouts and catches in initial condition that returns unitl 
     animation is complete 
     */
+  if (!getIsRunning()) {
+    /*
+        setCurrentSwappers,
+  setArray,
+  setCurrentFocusedElements,
+  setCurrentSorted,
+        */
+    dispatch(setCurrentFocusedElements([]));
+    dispatch(setCurrentSwappers([]));
+    dispatch(setCurrentSorted([]));
 
+    return;
+  }
   // Frames is empty and array is sorted
+  speed = getSpeed();
+
   if (!frames.length) {
     // Dispatch a frame of all to show that all are sorted
     dispatch(setCurrentFocusedElements(arr.map((val, index) => index)));
@@ -71,7 +93,7 @@ const dispatchFrames = (frames, dispatch, arr, speed) => {
       dispatch(setCurrentSorted(arr.map((num, index) => index)));
       // revert isRunning to false as sorting has terminated
       dispatch(setIsRunning(false));
-    }, finalFrameSpeed);
+    }, speed);
     return;
   }
   // Frames is empty
@@ -103,7 +125,7 @@ const dispatchFrames = (frames, dispatch, arr, speed) => {
 
   // Recursively call dispatchFrames with updated frames after specified time
   setTimeout(() => {
-    dispatchFrames(frames, dispatch, arr, speed);
+    dispatchFrames(frames, dispatch, arr, speed, getSpeed, getIsRunning);
   }, speed);
 };
 

@@ -54,3 +54,10 @@ export const setCurrAlgorithm = (alg) => {
     payload: alg,
   };
 };
+
+export const setCurrSpeed = (val) => {
+  return {
+    type: 'SET_SPEED',
+    payload: val,
+  };
+};

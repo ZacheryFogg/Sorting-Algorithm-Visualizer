@@ -10,3 +10,13 @@
 #startSortBtn {
   display: inline-block;
 }
+
+#speedRangeContainer {
+}
+#speedRangeInput {
+  padding: 5px;
+}
+
+#speedRangeLabel {
+  padding-bottom: 5px;
+}

@@ -33,16 +33,16 @@
   border-radius: 4px;
   color: white;
 }
-#redBlock {
+#swapBlock {
   background-color: red;
 }
-#greenBlock {
+#evalBlock {
   background-color: green;
 }
-#blueBlock {
+#finalBlock {
   background-color: blue;
 }
-#purpleBlock {
+#unsortedBlock {
   background-color: purple;
 }
 

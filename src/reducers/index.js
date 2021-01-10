@@ -66,7 +66,18 @@ const currAlgorithmReducer = (state = 'bubbleSort', action) => {
   }
 };
 
+// Update speed
+const currentSpeedReducer = (state = 300, action) => {
+  switch (action.type) {
+    case 'SET_SPEED':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
+  speed: currentSpeedReducer,
   isRunning: isRunningReducer,
   currFocusedElements: currentFocusedElementsReducer,
   array: currentArrayReducer,

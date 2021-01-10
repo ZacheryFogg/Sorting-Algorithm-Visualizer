@@ -4,7 +4,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddelware } from 'redux';
+import { createStore } from 'redux';
 
 // Project Component Imports
 import reducers from './reducers/index';

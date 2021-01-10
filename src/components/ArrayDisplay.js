@@ -57,7 +57,7 @@ class ArrayDisplay extends React.Component {
         <div id="arrayBody">{this.renderedArray()}</div>
         <div id="legend">
           <div className="legendBlock">
-            <div className="colorBlock" id="redBlock">
+            <div className="colorBlock" id="swapBlock">
               R
             </div>
             <p>
@@ -65,7 +65,7 @@ class ArrayDisplay extends React.Component {
             </p>
           </div>
           <div className="legendBlock">
-            <div className="colorBlock" id="blueBlock">
+            <div className="colorBlock" id="finalBlock">
               B
             </div>
             <p>
@@ -73,7 +73,7 @@ class ArrayDisplay extends React.Component {
             </p>
           </div>
           <div className="legendBlock">
-            <div className="colorBlock" id="greenBlock">
+            <div className="colorBlock" id="evalBlock">
               G
             </div>
             <p>
@@ -81,7 +81,7 @@ class ArrayDisplay extends React.Component {
             </p>
           </div>
           <div className="legendBlock">
-            <div className="colorBlock" id="purpleBlock">
+            <div className="colorBlock" id="unsortedBlock">
               P
             </div>
             <p>
