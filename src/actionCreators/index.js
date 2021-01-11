@@ -70,3 +70,17 @@ export const setCurrentMergeFocused = (arr) => {
     payload: arr,
   };
 };
+
+export const setCurrentQuickFocused = (arr) => {
+  return {
+    type: 'SET_CURRENT_QUICK_FOCUSED',
+    payload: arr,
+  };
+};
+
+export const setCurrentPivot = (val) => {
+  return {
+    type: 'SET_CURRENT_PIVOT',
+    payload: val,
+  };
+};

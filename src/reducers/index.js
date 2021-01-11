@@ -85,7 +85,27 @@ const currentMergeFocusedReducer = (state = [], action) => {
   }
 };
 
+const currentQuickFocusedReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_QUICK_FOCUSED':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const currentPivotReducer = (state = null, action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_PIVOT':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
+  currentPivot: currentPivotReducer,
+  currentQuickFocused: currentQuickFocusedReducer,
   currentMergeFocused: currentMergeFocusedReducer,
   speed: currentSpeedReducer,
   isRunning: isRunningReducer,

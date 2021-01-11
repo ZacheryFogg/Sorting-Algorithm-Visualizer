@@ -107,6 +107,34 @@ class ControlBar extends React.Component {
           >
             Merge Sort
           </button>
+          <button
+            onClick={() => {
+              changeCurrentAlgorithm('quickSort');
+            }}
+          >
+            Quick Sort
+          </button>
+          <button
+            onClick={() => {
+              changeCurrentAlgorithm('heapSort');
+            }}
+          >
+            Heap Sort
+          </button>
+          <button
+            onClick={() => {
+              changeCurrentAlgorithm('selectionSort');
+            }}
+          >
+            Selection Sort
+          </button>
+          <button
+            onClick={() => {
+              changeCurrentAlgorithm('insertionSort');
+            }}
+          >
+            Insertion Sort
+          </button>
           <h1>{this.props.currentAlgorithm}</h1>
         </div>
         <div>
@@ -134,14 +162,6 @@ class ControlBar extends React.Component {
   }
 }
 
-// Get state from store and map to props
-// const mapStateToProps = (state, ownProps) => {
-//   return {
-//     array: state.array,
-//     currAlgorithm: state.currAlgorithm,
-//     isRunning: state.isRunning,
-//   };
-// };
 const mapStateToProps = ({ array, currentAlgorithm, isRunning, speed }) => ({
   array,
   currentAlgorithm,
@@ -184,6 +204,10 @@ const mapDispatchToProps = () => (dispatch) => ({
         ? heapSort
         : alg === 'mergeSort'
         ? mergeSort
+        : alg === 'insertionSort'
+        ? insertionSort
+        : alg === 'selectionSort'
+        ? selectionSort
         : null;
     // Nothing has been sorted so pass nothing
     dispatch(setCurrentSorted([]));

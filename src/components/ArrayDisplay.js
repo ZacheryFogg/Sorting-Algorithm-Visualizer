@@ -11,6 +11,8 @@ class ArrayDisplay extends React.Component {
       currentSorted,
       currentSwappers,
       currentMergeFocused,
+      currentQuickFocused,
+      currentPivot,
     } = this.props;
 
     // TODO: make width and margin, fontSize depend on length of array
@@ -58,7 +60,12 @@ class ArrayDisplay extends React.Component {
           elementColor = 'green';
         } else if (currentBubbleFocused.includes(index)) {
           elementColor = 'green';
+        } else if (currentQuickFocused.includes(index)) {
+          elementColor = 'green';
+        } else if (currentPivot === index) {
+          elementColor = 'orange';
         }
+
         //TODO: logic for pivot
         else if (currentSorted.includes(index)) {
           elementColor = 'blue';
@@ -128,26 +135,22 @@ class ArrayDisplay extends React.Component {
   }
 }
 
-// const mapStateToProps = (state, ownProps) => {
-//   return {
-//     array: state.array,
-//     currFocusedElements: state.currentFocusedElements,
-//     currentSwappers: state.currentSwappers,
-//     currentSorted: state.currentSorted,
-//   };
-// };
 const mapStateToProps = ({
   array,
   currentBubbleFocused,
   currentSwappers,
   currentSorted,
   currentMergeFocused,
+  currentQuickFocused,
+  currentPivot,
 }) => ({
   array,
   currentBubbleFocused,
   currentSwappers,
   currentSorted,
   currentMergeFocused,
+  currentQuickFocused,
+  currentPivot,
 });
 const mapDispatchToProps = () => (dispatch) => ({});
 
