@@ -5,7 +5,13 @@ import '../styles/arrayDisplay.css';
 
 class ArrayDisplay extends React.Component {
   renderedArray = () => {
-    const { array, currFocusedElements, currSorted, currSwappers } = this.props;
+    const {
+      array,
+      currentBubbleFocused,
+      currentSorted,
+      currentSwappers,
+      currentMergeFocused,
+    } = this.props;
 
     // TODO: make width and margin, fontSize depend on length of array
     const elementWidthVal =
@@ -44,15 +50,17 @@ class ArrayDisplay extends React.Component {
       return array.map((val, index) => {
         let elementColor = 'purple';
 
-        if (currSwappers.includes(index)) {
+        if (currentSwappers.includes(index)) {
           elementColor = 'red';
         }
         // TODO: This is where we will add currentFocused for other algs
-        else if (currFocusedElements.includes(index)) {
+        else if (currentMergeFocused.includes(index)) {
+          elementColor = 'green';
+        } else if (currentBubbleFocused.includes(index)) {
           elementColor = 'green';
         }
         //TODO: logic for pivot
-        else if (currSorted.includes(index)) {
+        else if (currentSorted.includes(index)) {
           elementColor = 'blue';
         }
         return (
@@ -124,20 +132,22 @@ class ArrayDisplay extends React.Component {
 //   return {
 //     array: state.array,
 //     currFocusedElements: state.currentFocusedElements,
-//     currSwappers: state.currSwappers,
-//     currSorted: state.currSorted,
+//     currentSwappers: state.currentSwappers,
+//     currentSorted: state.currentSorted,
 //   };
 // };
 const mapStateToProps = ({
   array,
-  currFocusedElements,
-  currSwappers,
-  currSorted,
+  currentBubbleFocused,
+  currentSwappers,
+  currentSorted,
+  currentMergeFocused,
 }) => ({
   array,
-  currFocusedElements,
-  currSwappers,
-  currSorted,
+  currentBubbleFocused,
+  currentSwappers,
+  currentSorted,
+  currentMergeFocused,
 });
 const mapDispatchToProps = () => (dispatch) => ({});
 

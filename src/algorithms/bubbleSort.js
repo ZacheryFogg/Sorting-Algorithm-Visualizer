@@ -10,6 +10,8 @@ import {
 // Speed at which final frame updates
 
 // Function sorts array and creates array of frames to be rendered
+//TODO: Evaluate is speed param is still needed
+
 const bubbleSort = (stateArr, dispatch, speed, getSpeed, getIsRunning) => {
   // New array as to avoid mutating the original state
   let arr = stateArr.slice(0);
@@ -62,17 +64,9 @@ const dispatchFrames = (
   /*
     TODO: 
     
-    add an isRunning check to allow the user to stop the program
-    clears timeouts and catches in initial condition that returns unitl 
-    animation is complete 
+   pause functionality
     */
   if (!getIsRunning()) {
-    /*
-        setCurrentSwappers,
-  setArray,
-  setCurrentFocusedElements,
-  setCurrentSorted,
-        */
     dispatch(setCurrentFocusedElements([]));
     dispatch(setCurrentSwappers([]));
     dispatch(setCurrentSorted([]));

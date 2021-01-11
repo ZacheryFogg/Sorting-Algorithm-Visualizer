@@ -48,16 +48,25 @@ export const setIsRunning = (val) => {
 };
 
 // Create action to update the currently selected sorting algorithm
-export const setCurrAlgorithm = (alg) => {
+export const setCurrentAlgorithm = (alg) => {
   return {
-    type: 'SET_CURR_ALGORITHM',
+    type: 'SET_CURRENT_ALGORITHM',
     payload: alg,
   };
 };
 
-export const setCurrSpeed = (val) => {
+//Used to modify speed during sorting execution
+export const setCurrentSpeed = (val) => {
   return {
     type: 'SET_SPEED',
     payload: val,
+  };
+};
+
+//
+export const setCurrentMergeFocused = (arr) => {
+  return {
+    type: 'SET_CURRENT_MERGE_FOCUSED',
+    payload: arr,
   };
 };

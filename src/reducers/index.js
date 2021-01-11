@@ -57,9 +57,9 @@ const isRunningReducer = (state = false, action) => {
 };
 
 // Update the currently selected algorithm
-const currAlgorithmReducer = (state = 'bubbleSort', action) => {
+const currentAlgorithmReducer = (state = 'bubbleSort', action) => {
   switch (action.type) {
-    case 'SET_CURR_ALGORITHM':
+    case 'SET_CURRENT_ALGORITHM':
       return action.payload;
     default:
       return state;
@@ -76,12 +76,22 @@ const currentSpeedReducer = (state = 300, action) => {
   }
 };
 
+const currentMergeFocusedReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_MERGE_FOCUSED':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
+  currentMergeFocused: currentMergeFocusedReducer,
   speed: currentSpeedReducer,
   isRunning: isRunningReducer,
-  currFocusedElements: currentFocusedElementsReducer,
+  currentBubbleFocused: currentFocusedElementsReducer,
   array: currentArrayReducer,
-  currSorted: currentSortedReducer,
-  currSwappers: currentSwappersReducer,
-  currAlgorithm: currAlgorithmReducer,
+  currentSorted: currentSortedReducer,
+  currentSwappers: currentSwappersReducer,
+  currentAlgorithm: currentAlgorithmReducer,
 });

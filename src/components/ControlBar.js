@@ -4,12 +4,17 @@ import '../styles/controlBar.css';
 
 import {
   setArray,
-  setCurrAlgorithm,
+  setCurrentAlgorithm,
   setCurrentSorted,
   setIsRunning,
-  setCurrSpeed,
+  setCurrentSpeed,
 } from '../actionCreators';
 import bubbleSort from '../algorithms/bubbleSort';
+import mergeSort from '../algorithms/mergeSort';
+import quickSort from '../algorithms/quickSort';
+import heapSort from '../algorithms/heapSort';
+import insertionSort from '../algorithms/insertionSort';
+import selectionSort from '../algorithms/selectionSort';
 
 //Import action creators
 
@@ -20,23 +25,7 @@ class ControlBar extends React.Component {
     this.callbackIsRunningBound = this.callbackIsRunning.bind(this);
   }
   componentDidMount() {
-    /*
-      TODO: 
-      - give generate array proper args
-      - make scroll bar for speed start at 50 out of 100
-
-    */
     this.props.generateNewArray();
-  }
-
-  handleSizeChange(event) {
-    //calc bounds
-
-    this.props.generateNewArray(event.target.valueAsNumber);
-    console.log(event.target.valueAsNumber);
-  }
-  handleSpeedChange(event) {
-    this.props.changeSpeed(event.target.valueAsNumber);
   }
 
   callbackChangeSpeed() {
@@ -49,11 +38,12 @@ class ControlBar extends React.Component {
   render() {
     const {
       array,
-      currAlgorithm,
+      currentAlgorithm,
       startSort,
       cancelSort,
       generateNewArray,
-      //changeCurrAlgorithm,
+      changeCurrentAlgorithm,
+      changeSpeed,
       isRunning,
       speed,
     } = this.props;
@@ -83,7 +73,7 @@ class ControlBar extends React.Component {
               max="1000"
               value={speed}
               //disabled={isRunning ? 'disabled' : null}
-              onChange={(event) => this.handleSpeedChange(event)}
+              onChange={(event) => changeSpeed(event.target.valueAsNumber)}
             />
           }
         </div>
@@ -98,18 +88,34 @@ class ControlBar extends React.Component {
               max="90"
               value={array.length}
               disabled={isRunning ? 'disabled' : null}
-              onChange={(event) => this.handleSizeChange(event)}
+              onChange={(event) => generateNewArray(event.target.valueAsNumber)}
             />
           }
         </div>
-        <div>{/*Add Ability to change Algorithms*/}</div>
+        <div id="algSelection">
+          <button
+            onClick={() => {
+              changeCurrentAlgorithm('bubbleSort');
+            }}
+          >
+            Bubble Sort
+          </button>
+          <button
+            onClick={() => {
+              changeCurrentAlgorithm('mergeSort');
+            }}
+          >
+            Merge Sort
+          </button>
+          <h1>{this.props.currentAlgorithm}</h1>
+        </div>
         <div>
           <button
             id="startSortBtn"
             disabled={isRunning ? 'disabled' : null}
             onClick={() => {
               startSort(
-                currAlgorithm,
+                currentAlgorithm,
                 array,
                 speed,
                 this.callbackChangeSpeedBound,
@@ -136,17 +142,17 @@ class ControlBar extends React.Component {
 //     isRunning: state.isRunning,
 //   };
 // };
-const mapStateToProps = ({ array, currAlgorithm, isRunning, speed }) => ({
+const mapStateToProps = ({ array, currentAlgorithm, isRunning, speed }) => ({
   array,
-  currAlgorithm,
+  currentAlgorithm,
   isRunning,
   speed,
 });
 
 // action creators that dispatch info to be caught by reducers
 const mapDispatchToProps = () => (dispatch) => ({
-  changeCurrAlgorithm: (alg) => {
-    dispatch(setCurrAlgorithm(alg));
+  changeCurrentAlgorithm: (alg) => {
+    dispatch(setCurrentAlgorithm(alg));
   },
   generateNewArray: (len = 20, upperBound = 100, lowerBound = 5) => {
     let randomArr = [];
@@ -162,14 +168,23 @@ const mapDispatchToProps = () => (dispatch) => ({
     dispatch(setCurrentSorted([]));
   },
   startSort: (
-    alg = bubbleSort,
+    alg = 'bubbleSort',
     arr,
     speed,
     callbackChangeSpeed,
     callbackIsRunning
   ) => {
     // Determine sort to launch
-    let sortingAlg = bubbleSort;
+    let sortingAlg =
+      alg === 'bubbleSort'
+        ? bubbleSort
+        : alg === 'quickSort'
+        ? quickSort
+        : alg === 'heapSort'
+        ? heapSort
+        : alg === 'mergeSort'
+        ? mergeSort
+        : null;
     // Nothing has been sorted so pass nothing
     dispatch(setCurrentSorted([]));
     dispatch(setIsRunning(true));
@@ -181,7 +196,7 @@ const mapDispatchToProps = () => (dispatch) => ({
     dispatch(setIsRunning(false));
   },
   changeSpeed: (val) => {
-    dispatch(setCurrSpeed(val));
+    dispatch(setCurrentSpeed(val));
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ControlBar);
