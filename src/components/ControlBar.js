@@ -30,17 +30,12 @@ class ControlBar extends React.Component {
   }
 
   handleSizeChange(event) {
-    /*
-      TODO:
-      - allow size of array to be changed depending on slider postition
-    */
+    //calc bounds
+
+    this.props.generateNewArray(event.target.valueAsNumber);
+    console.log(event.target.valueAsNumber);
   }
   handleSpeedChange(event) {
-    /*
-      TODO:
-      - allow speed to change based on position of slider
-      would like speed to a state property that can be changed
-    */
     this.props.changeSpeed(event.target.valueAsNumber);
   }
 
@@ -92,7 +87,21 @@ class ControlBar extends React.Component {
             />
           }
         </div>
-        <div>{/*Add Size Slider and associated logic*/}</div>
+        <div id="sizeRangeContainer">
+          <label id="sizeRangeLabel">Set Array Size:</label>
+
+          {
+            <input
+              id="sizeRangeInput"
+              type="range"
+              min="4"
+              max="90"
+              value={array.length}
+              disabled={isRunning ? 'disabled' : null}
+              onChange={(event) => this.handleSizeChange(event)}
+            />
+          }
+        </div>
         <div>{/*Add Ability to change Algorithms*/}</div>
         <div>
           <button
@@ -139,7 +148,7 @@ const mapDispatchToProps = () => (dispatch) => ({
   changeCurrAlgorithm: (alg) => {
     dispatch(setCurrAlgorithm(alg));
   },
-  generateNewArray: (len = 20, upperBound = 100, lowerBound = 20) => {
+  generateNewArray: (len = 20, upperBound = 100, lowerBound = 5) => {
     let randomArr = [];
     // push n random numbers between bounds to randomArr
     for (let i = 0; i < len; i++) {

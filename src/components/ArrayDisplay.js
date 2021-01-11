@@ -8,12 +8,38 @@ class ArrayDisplay extends React.Component {
     const { array, currFocusedElements, currSorted, currSwappers } = this.props;
 
     // TODO: make width and margin, fontSize depend on length of array
-    const elementWidth = `${25}px`;
+    const elementWidthVal =
+      array.length < 10
+        ? 40
+        : array.length < 15
+        ? 35
+        : array.length < 22
+        ? 25
+        : array.length < 30
+        ? 16
+        : array.length < 40
+        ? 11
+        : array.length < 60
+        ? 5
+        : array.length < 70
+        ? 4
+        : array.length < 80
+        ? 3
+        : 2;
+    const fontSizeVal =
+      array.length < 10
+        ? 20
+        : array.length < 22
+        ? 15
+        : array.length < 30
+        ? 12
+        : array.length < 40
+        ? 9
+        : 0;
+    const elementWidth = `${elementWidthVal}px`;
     const margin = `${1}px`;
-    // if width is too small than color of text for values of each element become transparent
-    //const textColor = elementWidth > 15 ? 'black' : 'transparent';
     const textColor = 'white';
-    const fontSize = `${10}`;
+    const fontSize = `${fontSizeVal}px`;
     if (array.length) {
       return array.map((val, index) => {
         let elementColor = 'purple';
