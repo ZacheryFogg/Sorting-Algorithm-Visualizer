@@ -13,6 +13,10 @@ class ArrayDisplay extends React.Component {
       currentMergeFocused,
       currentQuickFocused,
       currentPivot,
+      currentHeapFocused,
+      currentSelectionFocused,
+      currentSelectionMin,
+      currentInsertionShifter,
     } = this.props;
 
     // TODO: make width and margin, fontSize depend on length of array
@@ -33,7 +37,7 @@ class ArrayDisplay extends React.Component {
         ? 4
         : array.length < 80
         ? 3
-        : 2;
+        : 3;
     const fontSizeVal =
       array.length < 10
         ? 20
@@ -44,6 +48,11 @@ class ArrayDisplay extends React.Component {
         : array.length < 40
         ? 9
         : 0;
+    const borderRadiusVal =
+      array.length < 22 ? 4 : array.length < 30 ? 3 : array.length < 70 ? 2 : 1;
+    const borderWidthVal = array.length < 40 ? 2 : 0;
+    const borderWidth = `${borderWidthVal}px`;
+    const borderRadius = `${borderRadiusVal}px`;
     const elementWidth = `${elementWidthVal}px`;
     const margin = `${1}px`;
     const textColor = 'white';
@@ -56,13 +65,19 @@ class ArrayDisplay extends React.Component {
           elementColor = 'red';
         }
         // TODO: This is where we will add currentFocused for other algs
-        else if (currentMergeFocused.includes(index)) {
+        else if (
+          currentMergeFocused.includes(index) ||
+          currentBubbleFocused.includes(index) ||
+          currentQuickFocused.includes(index) ||
+          currentHeapFocused.includes(index) ||
+          currentSelectionFocused.includes(index)
+        ) {
           elementColor = 'green';
-        } else if (currentBubbleFocused.includes(index)) {
-          elementColor = 'green';
-        } else if (currentQuickFocused.includes(index)) {
-          elementColor = 'green';
-        } else if (currentPivot === index) {
+        } else if (
+          currentPivot === index ||
+          currentSelectionMin === index ||
+          currentInsertionShifter === index
+        ) {
           elementColor = 'orange';
         }
 
@@ -75,13 +90,15 @@ class ArrayDisplay extends React.Component {
             className="arrayElement"
             key={index}
             style={{
-              height: `${val * 3}px`,
+              height: `${val * 4}px`,
               width: elementWidth,
               marginLeft: margin,
               marginRight: margin,
               backgroundColor: elementColor,
               color: textColor,
               fontSize: fontSize,
+              borderRadius: borderRadius,
+              borderWidth: borderWidth,
             }}
           >
             {val}
@@ -143,6 +160,10 @@ const mapStateToProps = ({
   currentMergeFocused,
   currentQuickFocused,
   currentPivot,
+  currentHeapFocused,
+  currentSelectionFocused,
+  currentSelectionMin,
+  currentInsertionShifter,
 }) => ({
   array,
   currentBubbleFocused,
@@ -151,6 +172,10 @@ const mapStateToProps = ({
   currentMergeFocused,
   currentQuickFocused,
   currentPivot,
+  currentHeapFocused,
+  currentSelectionFocused,
+  currentSelectionMin,
+  currentInsertionShifter,
 });
 const mapDispatchToProps = () => (dispatch) => ({});
 

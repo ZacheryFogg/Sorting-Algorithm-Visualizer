@@ -25,9 +25,9 @@ const currentArrayReducer = (state = [], action) => {
 };
 
 // Sets current elements being evalutated
-const currentFocusedElementsReducer = (state = [], action) => {
+const currentBubbleFocusedReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SET_CURRENT_FOCUSED_ELEMENTS':
+    case 'SET_CURRENT_BUBBLE_FOCUSED':
       return action.payload;
     default:
       return state;
@@ -103,13 +103,52 @@ const currentPivotReducer = (state = null, action) => {
   }
 };
 
+const currentHeapFocusedReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_HEAP_FOCUSED':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const currentSelectionFocusedReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_SELECTION_FOCUSED':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const currentSelectionMinRudcer = (state = null, action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_SELECTION_MIN':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const currentInsertionShifterReducer = (state = null, action) => {
+  switch (action.type) {
+    case 'SET_CURRENT_INSERTION_SHIFTER':
+      return action.payload;
+    default:
+      return state;
+  }
+};
 export default combineReducers({
+  currentInsertionShifter: currentInsertionShifterReducer,
+  currentSelectionMin: currentSelectionMinRudcer,
+  currentSelectionFocused: currentSelectionFocusedReducer,
+  currentHeapFocused: currentHeapFocusedReducer,
   currentPivot: currentPivotReducer,
   currentQuickFocused: currentQuickFocusedReducer,
   currentMergeFocused: currentMergeFocusedReducer,
   speed: currentSpeedReducer,
   isRunning: isRunningReducer,
-  currentBubbleFocused: currentFocusedElementsReducer,
+  currentBubbleFocused: currentBubbleFocusedReducer,
   array: currentArrayReducer,
   currentSorted: currentSortedReducer,
   currentSwappers: currentSwappersReducer,

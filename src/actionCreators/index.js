@@ -22,9 +22,9 @@ export const setArray = (arr) => {
 
 // Creates action to set the current two elements being considered for a swap
 // arr refers to the two elements being considered
-export const setCurrentFocusedElements = (arr) => {
+export const setCurrentBubbleFocused = (arr) => {
   return {
-    type: 'SET_CURRENT_FOCUSED_ELEMENTS',
+    type: 'SET_CURRENT_BUBBLE_FOCUSED',
     payload: arr,
   };
 };
@@ -81,6 +81,34 @@ export const setCurrentQuickFocused = (arr) => {
 export const setCurrentPivot = (val) => {
   return {
     type: 'SET_CURRENT_PIVOT',
+    payload: val,
+  };
+};
+
+export const setCurrentHeapFocused = (arr) => {
+  return {
+    type: 'SET_CURRENT_HEAP_FOCUSED',
+    payload: arr,
+  };
+};
+
+export const setCurrentSelectionFocused = (arr) => {
+  return {
+    type: 'SET_CURRENT_SELECTION_FOCUSED',
+    payload: arr,
+  };
+};
+
+export const setCurrentSelectionMin = (val) => {
+  return {
+    type: 'SET_CURRENT_SELECTION_MIN',
+    payload: val,
+  };
+};
+
+export const setCurrentInsertionShifter = (val) => {
+  return {
+    type: 'SET_CURRENT_INSERTION_SHIFTER',
     payload: val,
   };
 };

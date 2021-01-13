@@ -2,7 +2,7 @@
 import {
   setCurrentSwappers,
   setArray,
-  setCurrentFocusedElements,
+  setCurrentBubbleFocused,
   setCurrentSorted,
   setIsRunning,
 } from '../actionCreators';
@@ -10,7 +10,7 @@ import {
 // Speed at which final frame updates
 
 // Function sorts array and creates array of frames to be rendered
-//TODO: Evaluate is speed param is still needed
+//TODO: Evaluate if speed param is still needed
 
 const bubbleSort = (stateArr, dispatch, speed, getSpeed, getIsRunning) => {
   // New array as to avoid mutating the original state
@@ -45,6 +45,7 @@ const bubbleSort = (stateArr, dispatch, speed, getSpeed, getIsRunning) => {
     iteration++;
   }
   setTimeout(() => {
+    console.log(frames);
     dispatchFrames(frames, dispatch, arr, speed, getSpeed, getIsRunning);
     return arr;
   }, 100);
@@ -67,7 +68,7 @@ const dispatchFrames = (
    pause functionality
     */
   if (!getIsRunning()) {
-    dispatch(setCurrentFocusedElements([]));
+    dispatch(setCurrentBubbleFocused([]));
     dispatch(setCurrentSwappers([]));
     dispatch(setCurrentSorted([]));
 
@@ -78,11 +79,11 @@ const dispatchFrames = (
 
   if (!frames.length) {
     // Dispatch a frame of all to show that all are sorted
-    dispatch(setCurrentFocusedElements(arr.map((val, index) => index)));
+    dispatch(setCurrentBubbleFocused(arr.map((val, index) => index)));
     // Using timeout dispatch cleanup
     setTimeout(() => {
       // remove highlighting from all elements because algorithm has terminated
-      dispatch(setCurrentFocusedElements([]));
+      dispatch(setCurrentBubbleFocused([]));
       // revert all elements to be highlighted as sorted
       dispatch(setCurrentSorted(arr.map((num, index) => index)));
       // revert isRunning to false as sorting has terminated
@@ -111,7 +112,7 @@ const dispatchFrames = (
   }
   // Else this frame if of length 2 and contains two elements that are being focused
   else {
-    dispatchFunc = setCurrentFocusedElements;
+    dispatchFunc = setCurrentBubbleFocused;
   }
 
   // Dispatch the leading frame and pop it off the frame list

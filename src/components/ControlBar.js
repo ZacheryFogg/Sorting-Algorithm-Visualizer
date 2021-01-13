@@ -70,12 +70,13 @@ class ControlBar extends React.Component {
               id="speedRangeInput"
               type="range"
               min="1"
-              max="1000"
+              max="2000"
               value={speed}
               //disabled={isRunning ? 'disabled' : null}
               onChange={(event) => changeSpeed(event.target.valueAsNumber)}
             />
           }
+          <label>{`${speed}ms`}</label>
         </div>
         <div id="sizeRangeContainer">
           <label id="sizeRangeLabel">Set Array Size:</label>
@@ -85,12 +86,13 @@ class ControlBar extends React.Component {
               id="sizeRangeInput"
               type="range"
               min="4"
-              max="90"
+              max="125"
               value={array.length}
               disabled={isRunning ? 'disabled' : null}
               onChange={(event) => generateNewArray(event.target.valueAsNumber)}
             />
           }
+          <label>{`${array.length} elements`}</label>
         </div>
         <div id="algSelection">
           <button
