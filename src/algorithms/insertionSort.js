@@ -21,18 +21,19 @@ const insertionSort = (stateArr, dispatch, speed, getSpeed, getIsRunning) => {
     let j = i - 1;
     let key = array[i];
     // while element is larger than element to it's left, keep swapping
+    frames.push(['focus', [j]]);
+    let skip = j;
     while (j >= 0 && array[j] > key) {
+      frames.push(['swap', [j]]);
       array[j + 1] = array[j];
       array[j] = key;
-      // frame setArrays before the shift is moved down an index. If this loop is not entered then the
-      // array has not changed
-      //frames.push(['arr', array.slice(0)]);
-      // now that array is updated, set next index down as the shifter
+
       frames.push(['shift', j, array.slice(0)]);
       j--;
+      if (j >= 0) frames.push(['focus', [j]]);
     }
     array[j + 1] = key;
-    //frames.push(['empty']);
+    frames.push(['empty']);
   }
   frames.push(['final', array.slice(0)]);
 
@@ -75,30 +76,28 @@ const dispatchFrames = (
   // min focus swap arr empy
   let dispatchFunc = null;
   const method = frames[0][0];
-
   let outFrame = [];
   //frame represents whole array
-  if (method === 'arr') {
+  if (method === 'swap') {
     outFrame = frames[0][1];
-    dispatchFunc = setArray;
-  } else if (method === 'swap') {
-    outFrame.push(frames[0][1], frames[0][2]);
+    dispatch(setCurrentSelectionFocused([]));
     dispatchFunc = setCurrentSwappers;
   } else if (method === 'shift') {
     outFrame = frames[0][1];
-    //dispatch(setCurrentSelectionFocused([]));
     dispatchFunc = setCurrentInsertionShifter;
     dispatch(setArray(frames[0][2]));
+    dispatch(setCurrentSwappers([]));
   } else if (method === 'focus') {
-    outFrame.push(frames[0][1]);
+    outFrame = frames[0][1];
     dispatchFunc = setCurrentSelectionFocused;
   } else if (method === 'final') {
     outFrame.push(frames[0][1]);
     dispatchFunc = setCurrentSorted;
-  } else if (method !== 'empty') {
-    console.log('Error Selection Sort - Method:', method);
-  } else {
+  } else if (method === 'empty') {
     dispatchFunc = setCurrentSwappers;
+    dispatch(setCurrentSelectionFocused([]));
+    dispatch(setCurrentSwappers([]));
+    dispatch(setCurrentInsertionShifter(null));
   }
 
   // Dispatch the leading frame and pop it off the frame list

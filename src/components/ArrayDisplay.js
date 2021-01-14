@@ -32,12 +32,12 @@ class ArrayDisplay extends React.Component {
         : array.length < 40
         ? 11
         : array.length < 60
-        ? 5
-        : array.length < 70
-        ? 4
-        : array.length < 80
-        ? 3
-        : 3;
+        ? 9
+        : array.length < 75
+        ? 7
+        : array.length < 90
+        ? 6
+        : 4;
     const fontSizeVal =
       array.length < 10
         ? 20
