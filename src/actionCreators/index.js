@@ -112,3 +112,10 @@ export const setCurrentInsertionShifter = (val) => {
     payload: val,
   };
 };
+
+export const setIsPaused = (val) => {
+  return {
+    type: 'SET_IS_PAUSED',
+    payload: val,
+  };
+};

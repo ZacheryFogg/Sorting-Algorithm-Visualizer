@@ -138,6 +138,15 @@ const currentInsertionShifterReducer = (state = null, action) => {
       return state;
   }
 };
+
+const isPausedReducer = (state = false, action) => {
+  switch (action.type) {
+    case 'SET_IS_PAUSED':
+      return action.payload;
+    default:
+      return state;
+  }
+};
 export default combineReducers({
   currentInsertionShifter: currentInsertionShifterReducer,
   currentSelectionMin: currentSelectionMinRudcer,
@@ -148,6 +157,7 @@ export default combineReducers({
   currentMergeFocused: currentMergeFocusedReducer,
   speed: currentSpeedReducer,
   isRunning: isRunningReducer,
+  isPaused: isPausedReducer,
   currentBubbleFocused: currentBubbleFocusedReducer,
   array: currentArrayReducer,
   currentSorted: currentSortedReducer,

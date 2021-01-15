@@ -5,10 +5,7 @@
 }
 #generateNewArrayBtn {
   display: inline-block;
-}
-
-#startSortBtn {
-  display: inline-block;
+  margin-bottom: 10px;
 }
 
 #speedRangeContainer {
@@ -19,4 +16,10 @@
 
 #speedRangeLabel {
   padding-bottom: 5px;
+}
+#dropdown {
+  max-width: 100%;
+}
+#startBtn {
+  margin: 10px;
 }

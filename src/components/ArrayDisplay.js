@@ -111,40 +111,44 @@ class ArrayDisplay extends React.Component {
   };
   render() {
     return (
-      <div id="arrayDisplay">
-        <div id="arrayBody">{this.renderedArray()}</div>
-        <div id="legend">
-          <div className="legendBlock">
-            <div className="colorBlock" id="swapBlock">
-              R
-            </div>
-            <p>
-              <strong>Red:</strong> A pair of elements will be swapped
-            </p>
+      <div className="container" id="arrayDisplay">
+        <div className="row">
+          <div className="col-9" id="arrayBody">
+            {this.renderedArray()}
           </div>
-          <div className="legendBlock">
-            <div className="colorBlock" id="finalBlock">
-              B
+          <div className="col-3" id="legend">
+            <div className="legendBlock">
+              <div className="colorBlock" id="swapBlock">
+                R
+              </div>
+              <p>
+                <strong>Red:</strong> A pair of elements will be swapped
+              </p>
             </div>
-            <p>
-              <strong>Blue:</strong> An element is in its final position
-            </p>
-          </div>
-          <div className="legendBlock">
-            <div className="colorBlock" id="evalBlock">
-              G
+            <div className="legendBlock">
+              <div className="colorBlock" id="finalBlock">
+                B
+              </div>
+              <p>
+                <strong>Blue:</strong> An element is in its final position
+              </p>
             </div>
-            <p>
-              <strong>Green:</strong> A pair of elements is being evaluated
-            </p>
-          </div>
-          <div className="legendBlock">
-            <div className="colorBlock" id="unsortedBlock">
-              P
+            <div className="legendBlock">
+              <div className="colorBlock" id="evalBlock">
+                G
+              </div>
+              <p>
+                <strong>Green:</strong> A pair of elements is being evaluated
+              </p>
             </div>
-            <p>
-              <strong>Purple:</strong> An element is still unsorted
-            </p>
+            <div className="legendBlock">
+              <div className="colorBlock" id="unsortedBlock">
+                P
+              </div>
+              <p>
+                <strong>Purple:</strong> An element is still unsorted
+              </p>
+            </div>
           </div>
         </div>
       </div>

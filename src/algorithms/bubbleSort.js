@@ -45,7 +45,6 @@ const bubbleSort = (stateArr, dispatch, speed, getSpeed, getIsRunning) => {
     iteration++;
   }
   setTimeout(() => {
-    console.log(frames);
     dispatchFrames(frames, dispatch, arr, speed, getSpeed, getIsRunning);
     return arr;
   }, 100);
