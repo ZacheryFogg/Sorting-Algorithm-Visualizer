@@ -23,3 +23,9 @@
 #startBtn {
   margin: 10px;
 }
+
+#pageBody {
+  min-width: 1000px;
+  width: auto !important;
+  width: 1000px;
+}

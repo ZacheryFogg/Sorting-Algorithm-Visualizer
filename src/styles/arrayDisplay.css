@@ -9,7 +9,6 @@
 .arrayElement {
   padding-top: 7px;
   font-family: sans-serif;
-  font-weight: 700;
   display: inline-block;
   border: 2px solid black;
 }
@@ -17,10 +16,9 @@
 #arrayBody {
   border-radius: 4px;
   display: inline-block;
-  width: 95%;
-  padding: 5px;
+  padding: 0px;
   min-height: 450px;
-  min-width: 800px;
+  min-width: 765px;
 }
 .colorBlock {
   display: inline-block;
@@ -50,10 +48,12 @@
   display: inline-block;
   max-width: 150px;
   font-style: serif;
-  padding: 10px;
+  padding-bottom: 10px;
 }
 
 #legend {
+  /*
   border: 1px solid black;
   border-radius: 4px;
+  */
 }

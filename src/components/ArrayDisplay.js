@@ -57,12 +57,17 @@ class ArrayDisplay extends React.Component {
     const margin = `${1}px`;
     const textColor = 'white';
     const fontSize = `${fontSizeVal}px`;
+    const yellowColor = '#ffd319';
+    const orangeColor = '#ff901f';
+    const pinkColor = '#ff2975';
+    const lightPurpleColor = '#f222ff';
+    const darkPurpleColor = '#8c1eff';
     if (array.length) {
       return array.map((val, index) => {
-        let elementColor = 'purple';
+        let elementColor = darkPurpleColor; // purple
 
         if (currentSwappers.includes(index)) {
-          elementColor = 'red';
+          elementColor = orangeColor; // redish pink
         }
         // TODO: This is where we will add currentFocused for other algs
         else if (
@@ -72,18 +77,18 @@ class ArrayDisplay extends React.Component {
           currentHeapFocused.includes(index) ||
           currentSelectionFocused.includes(index)
         ) {
-          elementColor = 'green';
+          elementColor = pinkColor; // yellowish orange
         } else if (
           currentPivot === index ||
           currentSelectionMin === index ||
           currentInsertionShifter === index
         ) {
-          elementColor = 'orange';
+          elementColor = yellowColor; // yellowish orange
         }
 
         //TODO: logic for pivot
         else if (currentSorted.includes(index)) {
-          elementColor = 'blue';
+          elementColor = lightPurpleColor; // dark blue
         }
         return (
           <div
@@ -113,10 +118,10 @@ class ArrayDisplay extends React.Component {
     return (
       <div className="container" id="arrayDisplay">
         <div className="row">
-          <div className="col-9" id="arrayBody">
+          <div className="col-10" id="arrayBody">
             {this.renderedArray()}
           </div>
-          <div className="col-3" id="legend">
+          <div className="col-2" id="legend">
             <div className="legendBlock">
               <div className="colorBlock" id="swapBlock">
                 R

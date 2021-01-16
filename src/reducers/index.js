@@ -147,6 +147,8 @@ const isPausedReducer = (state = false, action) => {
       return state;
   }
 };
+
+
 export default combineReducers({
   currentInsertionShifter: currentInsertionShifterReducer,
   currentSelectionMin: currentSelectionMinRudcer,
