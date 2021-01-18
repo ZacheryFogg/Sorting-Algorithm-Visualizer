@@ -38,3 +38,7 @@
   font-style: serif;
   padding-bottom: 10px;
 }
+
+#legend {
+  border-left: solid black 2px;
+}
