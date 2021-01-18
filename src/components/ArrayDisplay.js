@@ -4,6 +4,14 @@ import '../styles/arrayDisplay.css';
 //Import action creators
 
 class ArrayDisplay extends React.Component {
+  constructor(props) {
+    super(props);
+    this.yellowColor = '#ffd319';
+    this.orangeColor = '#ff901f';
+    this.pinkColor = '#ff2975';
+    this.lightPurpleColor = '#f222ff';
+    this.darkPurpleColor = '#8c1eff';
+  }
   renderedArray = () => {
     const {
       array,
@@ -42,15 +50,15 @@ class ArrayDisplay extends React.Component {
       array.length < 10
         ? 20
         : array.length < 22
-        ? 15
+        ? 13
         : array.length < 30
-        ? 12
+        ? 10
         : array.length < 40
-        ? 9
+        ? 0
         : 0;
     const borderRadiusVal =
       array.length < 22 ? 4 : array.length < 30 ? 3 : array.length < 70 ? 2 : 1;
-    const borderWidthVal = array.length < 40 ? 2 : 0;
+    const borderWidthVal = array.length < 30 ? 2 : 0;
     const borderWidth = `${borderWidthVal}px`;
     const borderRadius = `${borderRadiusVal}px`;
     const elementWidth = `${elementWidthVal}px`;
@@ -64,10 +72,10 @@ class ArrayDisplay extends React.Component {
     const darkPurpleColor = '#8c1eff';
     if (array.length) {
       return array.map((val, index) => {
-        let elementColor = darkPurpleColor; // purple
+        let elementColor = this.darkPurpleColor; // purple
 
         if (currentSwappers.includes(index)) {
-          elementColor = orangeColor; // redish pink
+          elementColor = this.orangeColor; // redish pink
         }
         // TODO: This is where we will add currentFocused for other algs
         else if (
@@ -77,18 +85,18 @@ class ArrayDisplay extends React.Component {
           currentHeapFocused.includes(index) ||
           currentSelectionFocused.includes(index)
         ) {
-          elementColor = pinkColor; // yellowish orange
+          elementColor = this.pinkColor; // yellowish orange
         } else if (
           currentPivot === index ||
           currentSelectionMin === index ||
           currentInsertionShifter === index
         ) {
-          elementColor = yellowColor; // yellowish orange
+          elementColor = this.yellowColor; // yellowish orange
         }
 
         //TODO: logic for pivot
         else if (currentSorted.includes(index)) {
-          elementColor = lightPurpleColor; // dark blue
+          elementColor = this.lightPurpleColor; // dark blue
         }
         return (
           <div
@@ -123,35 +131,59 @@ class ArrayDisplay extends React.Component {
           </div>
           <div className="col-2" id="legend">
             <div className="legendBlock">
-              <div className="colorBlock" id="swapBlock">
-                R
-              </div>
+              <div
+                className="colorBlock"
+                style={{ backgroundColor: this.yellowColor }}
+              ></div>
               <p>
-                <strong>Red:</strong> A pair of elements will be swapped
+                <strong style={{ color: this.yellowColor }}>Yellow:</strong> An
+                element is a pivot-(Quick Sort), a Min-(Selection Sort), or the
+                element being inserted-(Insertion Sort)
               </p>
             </div>
             <div className="legendBlock">
-              <div className="colorBlock" id="finalBlock">
-                B
-              </div>
+              <div
+                className="colorBlock"
+                style={{ backgroundColor: this.orangeColor }}
+              ></div>
               <p>
-                <strong>Blue:</strong> An element is in its final position
+                <strong style={{ color: this.orangeColor }}>Orange:</strong> A
+                pair of elements will be swapped
               </p>
             </div>
             <div className="legendBlock">
-              <div className="colorBlock" id="evalBlock">
-                G
-              </div>
+              <div
+                className="colorBlock"
+                style={{ backgroundColor: this.pinkColor }}
+              ></div>
               <p>
-                <strong>Green:</strong> A pair of elements is being evaluated
+                <strong style={{ color: this.pinkColor }}>Pink:</strong> A pair
+                of elements is being evaluated
               </p>
             </div>
             <div className="legendBlock">
-              <div className="colorBlock" id="unsortedBlock">
-                P
-              </div>
+              <div
+                className="colorBlock"
+                style={{ backgroundColor: this.lightPurpleColor }}
+              ></div>
               <p>
-                <strong>Purple:</strong> An element is still unsorted
+                <strong style={{ color: this.lightPurpleColor }}>
+                  Light Purple:
+                </strong>{' '}
+                An element is in its final position
+              </p>
+            </div>
+
+            <div className="legendBlock">
+              <div
+                className="colorBlock"
+                style={{ backgroundColor: this.darkPurpleColor }}
+              ></div>
+              <p>
+                <strong style={{ color: this.darkPurpleColor }}>
+                  Dark Purple:
+                </strong>{' '}
+                An element is still unsorted
               </p>
             </div>
           </div>

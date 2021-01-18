@@ -22,38 +22,19 @@
 }
 .colorBlock {
   display: inline-block;
-  max-height: 50px;
-  max-width: 25px;
-  min-height: 50px;
-  min-width: 25px;
-  border: 2px solid black;
-  border-radius: 4px;
+  max-height: 25px;
+  max-width: 15px;
+  min-height: 25px;
+  min-width: 15px;
+  border: 1px solid black;
+  border-radius: 2px;
   color: white;
-}
-#swapBlock {
-  background-color: red;
-}
-#evalBlock {
-  background-color: green;
-}
-#finalBlock {
-  background-color: blue;
-}
-#unsortedBlock {
-  background-color: purple;
 }
 
 .legendBlock {
-  border-radius: 4px;
+  border-radius: 2px;
   display: inline-block;
   max-width: 150px;
   font-style: serif;
   padding-bottom: 10px;
-}
-
-#legend {
-  /*
-  border: 1px solid black;
-  border-radius: 4px;
-  */
 }

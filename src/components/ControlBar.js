@@ -165,7 +165,7 @@ class ControlBar extends React.Component {
             <form>
               <div id="speedRangeContainer" className="form-group">
                 <label htmlFor="formControlRange" id="speedRangeLabel">
-                  Set Speed
+                  Set Speed (Can change mid sort)
                 </label>
 
                 {
@@ -322,51 +322,3 @@ const mapDispatchToProps = () => (dispatch, ownProps) => ({
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ControlBar);
-
-/*
-       <div id="algSelection">
-              <button
-                onClick={() => {
-                  changeCurrentAlgorithm('bubbleSort');
-                }}
-              >
-                Bubble Sort
-              </button>
-              <button
-                onClick={() => {
-                  changeCurrentAlgorithm('mergeSort');
-                }}
-              >
-                Merge Sort
-              </button>
-              <button
-                onClick={() => {
-                  changeCurrentAlgorithm('quickSort');
-                }}
-              >
-                Quick Sort
-              </button>
-              <button
-                onClick={() => {
-                  changeCurrentAlgorithm('heapSort');
-                }}
-              >
-                Heap Sort
-              </button>
-              <button
-                onClick={() => {
-                  changeCurrentAlgorithm('selectionSort');
-                }}
-              >
-                Selection Sort
-              </button>
-              <button
-                onClick={() => {
-                  changeCurrentAlgorithm('insertionSort');
-                }}
-              >
-                Insertion Sort
-              </button>
-              <h3>{this.props.currentAlgorithm}</h3>
-            </div>
-*/
